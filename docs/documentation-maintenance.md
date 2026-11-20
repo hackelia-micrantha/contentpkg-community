@@ -1,6 +1,6 @@
 # Public documentation maintenance
 
-**Adoption:** Micrantha shared `documentation-sync` default, unchanged. Follow the [shared skill](https://github.com/hackelia-micrantha/.github/blob/main/skills/documentation-sync/SKILL.md) for evidence reconciliation, bounded ambiguity decisions, and review. This document records the project-specific authority and test entry points; it does not copy the organization skill.
+**Adoption:** [Micrantha documentation standard](https://github.com/hackelia-micrantha/.github/blob/main/docs/standards/documentation.md), including public-claim consistency. This document records the project-specific authority and test entry points; it does not replace the shared standard.
 
 ## Publication and authority
 
@@ -38,4 +38,4 @@ go vet -mod=readonly ./...
 
 Review claims after public specification or fixture revisions, ownership/recovery/ledger semantic changes, conformance-accounting changes, security profile proposals, release/install path changes, or public/private promotion decisions. Preserve version labels and exact corpus accounting. Prefer tests or deterministic checks for count, vector, link and manifest drift; retain human review for normative/security/licensing claims.
 
-Surface ambiguous changes using the shared skill's `DOC-Q*` human decision queue. This public project has no additional `documentation-sync` specialization at present.
+Refer material unresolved documentation, licensing, release, or public-claim decisions to the accountable maintainer before publication.
