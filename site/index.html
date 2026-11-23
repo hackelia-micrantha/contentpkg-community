@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="CONTENTPKG explores verifiable digital content packaging. MUSICPKG is its first specialization: an open working draft for durable digital music ownership.">
-  <title>CONTENTPKG — Digital content, verifiable by design</title>
+  <meta name="description" content="CONTENTPKG explores self-contained digital ownership through encrypted content packages and compact blockchain-backed ownership evidence. MUSICPKG is its first specialization.">
+  <title>CONTENTPKG — Digital ownership that travels with the content</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -26,9 +26,9 @@
     <section class="wrap hero">
       <div>
         <p class="eyebrow">Micrantha / applied research</p>
-        <h1>Digital content, verifiable by design.</h1>
+        <h1>Digital ownership that travels with the content.</h1>
         <p class="lede">What if a digital purchase could be as durable and portable as the physical media it replaced?</p>
-        <p>CONTENTPKG explores a shared foundation for verifiable digital content packages. Its first specialization, MUSICPKG, is an open format for durable music ownership, designed to separate possession of a file from the rights to use it.</p>
+        <p>CONTENTPKG explores self-contained digital ownership through encrypted content packages and compact blockchain-backed ownership evidence. The goal is to make digital purchases portable, independently verifiable and durable beyond the platforms that originally sold them. MUSICPKG is the first specialization.</p>
         <div class="actions">
           <a class="button primary" href="https://demo.musicpkg.micrantha.com/">Explore the music demo preview</a>
           <a class="button" href="https://github.com/hackelia-micrantha/musicpkg-community">Read the working draft</a>
@@ -36,26 +36,26 @@
         <p class="meta">Experimental research · MUSICPKG v0.2 Working Draft · Demo access may be restricted</p>
       </div>
       <figure class="model">
-        <figcaption class="eyebrow">One foundation, distinct rights models</figcaption>
-        <div class="node blue"><strong>CONTENTPKG</strong><span>Packaging, integrity and cryptographic building blocks</span></div>
+        <figcaption class="eyebrow">Inside a MUSICPKG — conceptual model</figcaption>
+        <div class="node blue"><strong>Portable encrypted package</strong><span>Encrypted media, signed issuance and bundled ownership evidence</span></div>
         <div class="connector" aria-hidden="true"></div>
         <div class="model-pair">
-          <div class="node green"><strong>MUSICPKG</strong><span>Durable music ownership</span><small>Working draft</small></div>
-          <div class="node lilac"><strong>Other content profiles</strong><span>Content-specific access and rights</span><small>Research direction</small></div>
+          <div class="node green"><strong>Owner authority</strong><span>Owner-controlled keys, recovery and device enrollment</span><small>Offline use</small></div>
+          <div class="node lilac"><strong>Compact ledger proof</strong><span>Signed checkpoints and historical issuance evidence</span><small>Verifiable history</small></div>
         </div>
-        <p class="meta">Conceptual architecture. Each profile defines its own rights; the shared foundation does not decide who owns or may access content.</p>
+        <p class="meta">The package carries evidence from a purpose-built ownership ledger, not a complete live blockchain. Fresh canonical title and new transfers require current ledger finality; ordinary legitimate playback is designed to work offline.</p>
       </figure>
     </section>
     <section class="wrap section" id="foundation">
       <p class="eyebrow">01 / The foundation</p>
-      <h2>Portable packages. Verifiable claims.</h2>
-      <p class="intro">The goal is to make content protection and verification reusable without imposing a single business model on every kind of media.</p>
+      <h2>Encryption meets verifiable ownership.</h2>
+      <p class="intro">Instead of asking a vendor to authorize every use, the research explores packages that carry the evidence needed to verify their authenticity and establish historical ownership, alongside owner-controlled cryptographic authority.</p>
       <div class="grid three">
-        <article><h3>Integrity</h3><p>Verify that authenticated content and its associated evidence have not been silently modified.</p></article>
-        <article><h3>Authenticity</h3><p>Use cryptographic evidence to establish the provenance of a package under its profile's trust assumptions.</p></article>
-        <article><h3>Independent rights profiles</h3><p>Keep the mechanics of packaging and cryptography separate from ownership, access and transfer rules.</p></article>
+        <article><h3>Encrypted content</h3><p>Protect the media itself and authenticate its integrity. Possession of the encrypted file alone does not confer the authority to decrypt it.</p></article>
+        <article><h3>Compact blockchain evidence</h3><p>Bundle signed issuance records and proofs from a purpose-built, hash-linked ownership ledger. This is evidence of historical issuance, not a cryptocurrency or proof of fresh title.</p><a href="https://github.com/hackelia-micrantha/musicpkg-community/blob/main/spec/ledger-v0.2.md">Ownership ledger specification</a></article>
+        <article><h3>Owner-controlled authority</h3><p>Keep recovery and ordinary device authorization under the purchaser’s control, rather than depending on recurring approval from the original seller.</p></article>
       </div>
-      <p class="meta">CONTENTPKG is an experimental engineering foundation, not a published general-purpose standard or a commercial rights service.</p>
+      <p class="meta">CONTENTPKG explores reusable packaging and cryptographic mechanics; each specialization defines its own ownership, access and transfer rules. MUSICPKG is the first working draft; other content profiles are research directions. CONTENTPKG is not a published general-purpose standard or a commercial rights service.</p>
     </section>
     <section class="wrap section" id="music">
       <p class="eyebrow">02 / First specialization</p>
