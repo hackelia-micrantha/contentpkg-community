@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-phyllotaxis-profile="utility" data-phyllotaxis-scheme="light">
+<head>
+  <!-- SPDX-License-Identifier: Apache-2.0 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="CONTENTPKG explores verifiable digital content packaging. MUSICPKG is its first specialization: an open working draft for durable digital music ownership.">
+  <title>CONTENTPKG — Digital content, verifiable by design</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap nav">
+    <a class="brand" href="./"><span class="mark" aria-hidden="true">CP<small>PKG</small></span> CONTENTPKG</a>
+    <nav aria-label="Main navigation">
+      <a href="#foundation">Foundation</a>
+      <a href="#music">Music ownership</a>
+      <a href="#opportunity">Opportunity</a>
+      <a href="#engineering">Engineering</a>
+      <a href="https://ryanjennin.gs/">Profile</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="wrap hero">
+      <div>
+        <p class="eyebrow">Micrantha / applied research</p>
+        <h1>Digital content, verifiable by design.</h1>
+        <p class="lede">What if a digital purchase could be as durable and portable as the physical media it replaced?</p>
+        <p>CONTENTPKG explores a shared foundation for verifiable digital content packages. Its first specialization, MUSICPKG, is an open format for durable music ownership, designed to separate possession of a file from the rights to use it.</p>
+        <div class="actions">
+          <a class="button primary" href="https://demo.musicpkg.micrantha.com/">Explore the music demo preview</a>
+          <a class="button" href="https://github.com/hackelia-micrantha/musicpkg-community">Read the working draft</a>
+        </div>
+        <p class="meta">Experimental research · MUSICPKG v0.2 Working Draft · Demo access may be restricted</p>
+      </div>
+      <figure class="model">
+        <figcaption class="eyebrow">One foundation, distinct rights models</figcaption>
+        <div class="node blue"><strong>CONTENTPKG</strong><span>Packaging, integrity and cryptographic building blocks</span></div>
+        <div class="connector" aria-hidden="true"></div>
+        <div class="model-pair">
+          <div class="node green"><strong>MUSICPKG</strong><span>Durable music ownership</span><small>Working draft</small></div>
+          <div class="node lilac"><strong>Other content profiles</strong><span>Content-specific access and rights</span><small>Research direction</small></div>
+        </div>
+        <p class="meta">Conceptual architecture. Each profile defines its own rights; the shared foundation does not decide who owns or may access content.</p>
+      </figure>
+    </section>
+    <section class="wrap section" id="foundation">
+      <p class="eyebrow">01 / The foundation</p>
+      <h2>Portable packages. Verifiable claims.</h2>
+      <p class="intro">The goal is to make content protection and verification reusable without imposing a single business model on every kind of media.</p>
+      <div class="grid three">
+        <article><h3>Integrity</h3><p>Verify that authenticated content and its associated evidence have not been silently modified.</p></article>
+        <article><h3>Authenticity</h3><p>Use cryptographic evidence to establish the provenance of a package under its profile's trust assumptions.</p></article>
+        <article><h3>Independent rights profiles</h3><p>Keep the mechanics of packaging and cryptography separate from ownership, access and transfer rules.</p></article>
+      </div>
+      <p class="meta">CONTENTPKG is an experimental engineering foundation, not a published general-purpose standard or a commercial rights service.</p>
+    </section>
+    <section class="wrap section" id="music">
+      <p class="eyebrow">02 / First specialization</p>
+      <h2>Make digital music like CDs again.</h2>
+      <p class="lede">Buy it. Own it. Play it. Back it up. Sell or gift it where permitted.</p>
+      <p class="intro">MUSICPKG proposes a model in which a one-time purchase does not depend on a retailer's continued operation or periodic license renewal.</p>
+      <div class="grid two">
+        <article class="panel green"><span class="eyebrow">For listeners</span><h3>Durable ownership</h3><p>Play offline after legitimate enrollment, authorize your own devices and recover purchases on replacement hardware.</p></article>
+        <article class="panel blue"><span class="eyebrow">For creators</span><h3>Authentic issuance</h3><p>Sell a legitimate copy once, with cryptographically verifiable issuance and evidence of ownership without remaining in the ordinary playback path.</p></article>
+        <article class="panel sand"><span class="eyebrow">For collectors</span><h3>Transferable title</h3><p>Where a title permits it, the design supports legitimate resale or gifting with a verifiable change of canonical ownership.</p></article>
+        <article class="panel lilac"><span class="eyebrow">For both sides</span><h3>Copying is not owning</h3><p>Copying an encrypted package alone is not intended to confer playback authority. Encrypted backups need not create new ownership rights.</p></article>
+      </div>
+      <div class="note"><strong>A realistic security boundary.</strong> MUSICPKG does not promise to prevent all audio capture or erase previously obtained plaintext or keys after a transfer. Canonical title transfer depends on the stated registry trust and finality assumptions.</div>
+      <p><a class="button primary" href="https://demo.musicpkg.micrantha.com/">Open the MUSICPKG demo preview</a></p>
+      <p class="meta">The preview is experimental and may require access approval. It is not a live marketplace, payment system or production ownership service.</p>
+    </section>
+    <section class="wrap section" id="opportunity">
+      <p class="eyebrow">03 / The opportunity</p>
+      <h2>A different model for digital distribution.</h2>
+      <div class="grid two">
+        <article class="edge"><h3>Investors and partners</h3><p>Explore the intersection of durable digital purchases, direct-to-fan distribution and interoperable ownership evidence. Potential applications include independent storefronts, digital collections and transferable catalogs, subject to rights agreements and technical validation.</p><p>The opportunity is a research hypothesis, not a claim of market traction or an investment offering.</p><a href="https://ryanjennin.gs/">Connect with the project author</a></article>
+        <article class="edge"><h3>Artists, labels and publishers</h3><p>Could a one-time digital sale offer listeners a durable purchase while making casual redistribution of encrypted files less useful? MUSICPKG explores that trade-off without requiring publishers to authorize every ordinary playback.</p><a href="https://github.com/hackelia-micrantha/musicpkg-community/blob/main/PRODUCT.md">Explore the creator and listener contract</a></article>
+      </div>
+    </section>
+    <section class="wrap section" id="engineering">
+      <p class="eyebrow">04 / Engineering and research</p>
+      <h2>Open contracts. Independent implementations.</h2>
+      <p class="intro">The published MUSICPKG working draft is intended to let independent implementers build interoperable producers, verifiers and players without a private repository or Micrantha-operated service.</p>
+      <div class="grid three">
+        <article class="edge"><h3>Applied cryptography</h3><p>Authenticated media, signed issuance, owner-controlled recovery and explicit trust boundaries.</p><a href="https://github.com/hackelia-micrantha/musicpkg-community/tree/main/spec">Protocol specifications</a></article>
+        <article class="edge"><h3>Interoperability</h3><p>Deterministic schemas, test vectors and a public Rust reference conformance harness.</p><a href="https://github.com/hackelia-micrantha/musicpkg-community/tree/main/test-vectors">Public test vectors</a></article>
+        <article class="edge"><h3>Security and correctness</h3><p>Separate historical evidence from current ownership, and state what protection can and cannot guarantee.</p><a href="https://github.com/hackelia-micrantha/musicpkg-community/blob/main/SECURITY.md">Security model</a></article>
+      </div>
+      <div class="note"><strong>Research status.</strong> MUSICPKG v0.2 is a working draft. The public corpus contains 26 executable reference checks and 23 contract assertions, not a complete product-verification suite. Full end-to-end production verification and ownership infrastructure are not established.</div>
+    </section>
+    <section class="wrap section about" id="about">
+      <div>
+        <p class="eyebrow">05 / The engineer behind the project</p>
+        <h2>Ryan Jennings</h2>
+        <p>Senior software engineer exploring applied cryptography, secure software architecture, interoperability and durable digital systems through independent engineering and research.</p>
+        <p>Open to technical collaboration and conversations about senior engineering opportunities, applied research and content technology.</p>
+        <div class="actions"><a class="button primary" href="https://ryanjennin.gs/">Professional profile</a><a class="button" href="https://github.com/ryjen">GitHub profile</a></div>
+      </div>
+      <div class="node blue"><strong>Research into practice</strong><span>Security engineering · Architecture · Open interoperability · Product development</span></div>
+    </section>
+  </main>
+  <footer class="wrap footer">
+    <p>CONTENTPKG / <a href="https://micrantha.com/">Micrantha</a> · Experimental research</p>
+    <nav aria-label="Footer navigation"><a href="https://github.com/hackelia-micrantha/musicpkg-community">Community</a><a href="https://github.com/hackelia-micrantha/musicpkg-community/blob/main/SECURITY.md">Security</a><a href="https://ryanjennin.gs/">Author</a></nav>
+  </footer>
+</body>
+</html>
