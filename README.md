@@ -1,4 +1,8 @@
-# MUSICPKG Community
+# CONTENTPKG Community
+
+CONTENTPKG explores self-contained digital ownership through encrypted content packages and compact, verifiable ownership evidence. MUSICPKG is its first specialization and the currently published interoperability contract. This community repository was renamed in place from `musicpkg-community`; the MUSICPKG v0.2 protocol and its published identifiers remain unchanged.
+
+[Landing page source](site/index.html) · [MUSICPKG demo preview](https://demo.musicpkg.micrantha.com/) (access may be restricted)
 
 MUSICPKG is an open digital music ownership format built around a simple product contract:
 
@@ -14,7 +18,7 @@ This repository is the public interoperability surface for MUSICPKG. A conformin
 
 ## Repository boundary
 
-`hackelia-micrantha/musicpkg-community` is authoritative for **published** MUSICPKG wire-format and interoperability contracts:
+`hackelia-micrantha/contentpkg-community` is authoritative for **published** MUSICPKG wire-format and interoperability contracts:
 
 - RFCs and protocol specifications;
 - deterministic schemas and cryptographic profiles;
@@ -39,7 +43,7 @@ Since the initial harness publication, the public v0.2 corpus also includes [`te
 
 The published checkpoint contract also distinguishes validator-set provenance from checkpoint-history completeness: a `validator-proof-chain` proves trusted validator-set transitions across rotations, but it does not prove omitted ordinary `previous_checkpoint_id` links. Complete adjacent-history claims require each immediate predecessor link to be supplied or otherwise trusted and verified.
 
-Post-v0.2 cryptographic profile evolution is tracked in [issue #15](https://github.com/hackelia-micrantha/musicpkg-community/issues/15). That work intentionally does **not** change the v0.2 wire format, mandatory algorithms, vectors, or current conformance requirements.
+Post-v0.2 cryptographic profile evolution is tracked in [issue #15](https://github.com/hackelia-micrantha/contentpkg-community/issues/15). That work intentionally does **not** change the v0.2 wire format, mandatory algorithms, vectors, or current conformance requirements.
 
 ## Run public conformance
 
@@ -53,7 +57,7 @@ cargo run --locked -p musicpkg-conformance -- --fixtures test-vectors/v0.2 --jso
 
 The first command prints a human-readable summary, the second emits the [versioned v2 JSON result](spec/conformance-report-v2.md), and the third runs format checks, tests, Clippy, and the strict 49-check report gate. CI runs on a GitHub-hosted runner; it does **not** execute public pull-request code on a privileged self-hosted host. Builds may download locked crates.io dependencies; fixture evaluation itself needs no network or vendor service.
 
-**Evidence limit:** The 15 product/failure scenarios and 8 negative parser/ledger/state checks are contract assertions, not production parser, ownership-ledger, package-verification, or player tests. A full-file `musicpkg verify` command, complete ledger state, and end-to-end playback remain future implementation work. The public specs and fixtures—not the Rust implementation—define normative behavior. See [the harness README](crates/musicpkg-conformance/README.md) and [issue #3](https://github.com/hackelia-micrantha/musicpkg-community/issues/3) for outstanding verifier scope.
+**Evidence limit:** The 15 product/failure scenarios and 8 negative parser/ledger/state checks are contract assertions, not production parser, ownership-ledger, package-verification, or player tests. A full-file `musicpkg verify` command, complete ledger state, and end-to-end playback remain future implementation work. The public specs and fixtures—not the Rust implementation—define normative behavior. See [the harness README](crates/musicpkg-conformance/README.md) and [issue #3](https://github.com/hackelia-micrantha/contentpkg-community/issues/3) for outstanding verifier scope.
 
 ## Security model
 
