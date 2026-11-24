@@ -4,6 +4,16 @@ CONTENTPKG explores self-contained digital ownership through encrypted content p
 
 [Landing page source](site/index.html) · [MUSICPKG demo preview](https://demo.musicpkg.micrantha.com/) (access may be restricted)
 
+Public website deployment: changes to the allowlisted `site/` HTML/CSS/SVG
+files merged into `main` automatically synchronize to the existing
+`gh-pages` branch via [Publish CONTENTPKG website](.github/workflows/publish-pages.yml).
+GitHub Pages then serves that branch. The workflow preserves `.nojekyll`,
+refuses unexpected public files or non-fast-forward publication, and does not
+publish the private MUSICPKG implementation. A manual workflow rerun can
+synchronize unchanged or missed website content without editing site files.
+The repository's Pages setting must continue using the existing `gh-pages`
+branch; the job requires GitHub Actions `contents: write` to push it.
+
 MUSICPKG is an open digital music ownership format built around a simple product contract:
 
 > Buy a music file once. Own it. Play it on your devices. Back it up. Prove it is yours. Transfer ownership legitimately when the title permits it.
