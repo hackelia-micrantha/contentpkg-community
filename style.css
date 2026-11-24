@@ -82,3 +82,8 @@ h3 { font-size: 1.1rem; line-height: 1.35; }
 @media (forced-colors: active) {
   .node, .panel { border: 1px solid CanvasText; }
 }
+
+/* Product navigation: distinguish the current page without relying on color. */
+.nav nav { gap: .35rem; }
+.nav nav a { display: inline-flex; align-items: center; min-height: 44px; padding: .35rem .65rem; border-bottom: 2px solid transparent; }
+.nav nav a[aria-current="page"] { color: var(--ink); font-weight: 700; background: var(--blue); border-bottom-color: currentColor; text-decoration: none; }
