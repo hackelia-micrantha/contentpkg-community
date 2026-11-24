@@ -82,3 +82,6 @@ h3 { font-size: 1.1rem; line-height: 1.35; }
 @media (forced-colors: active) {
   .node, .panel { border: 1px solid CanvasText; }
 }
+
+/* Product navigation: show the current document without relying on color. */
+.nav a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 2px; }
