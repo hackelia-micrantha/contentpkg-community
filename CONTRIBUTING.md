@@ -1,6 +1,6 @@
 # Contributing
 
-MUSICPKG Community accepts contributions to the public specification, interoperability fixtures, conformance behavior, and reference tooling.
+CONTENTPKG Community accepts contributions to public explanatory material, the published MUSICPKG specification, interoperability fixtures, conformance behavior, and reference tooling.
 
 ## Design constraints
 

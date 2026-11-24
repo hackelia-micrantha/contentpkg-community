@@ -1,6 +1,6 @@
 # Upstream and provenance
 
-`musicpkg-community` is the public interoperability surface for MUSICPKG. It is maintained from the private canonical engineering repository through deliberate, reviewed promotion rather than repository mirroring.
+`contentpkg-community` (formerly `musicpkg-community`) is the public explanatory and interoperability surface for CONTENTPKG. Its currently published normative contract is MUSICPKG v0.2; the rename does not change the protocol or publish a new generic standard. It is maintained from the private canonical engineering repository through deliberate, reviewed promotion rather than repository mirroring.
 
 ## Initial v0.2 publication
 
@@ -14,8 +14,8 @@
 
 The repositories have different authorities:
 
-- `musicpkg-community` is authoritative for **published** wire-format, verification, and conformance contracts.
-- `musicpkg` is authoritative for private engineering implementation, unpublished design/security work, adversarial research, and publication staging.
+- `contentpkg-community` is authoritative for **published** wire-format, verification, and conformance contracts.
+- `contentpkg` (formerly `musicpkg`) is authoritative for private engineering implementation, unpublished design/security work, adversarial research, and publication staging.
 
 An implementation does not silently redefine the published format. If implementation evidence exposes a specification defect, the public contract is revised explicitly, reviewed, versioned, and accompanied by updated fixtures when behavior changes.
 
