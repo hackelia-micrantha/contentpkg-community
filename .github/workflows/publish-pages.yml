@@ -1,18 +1,17 @@
 name: Publish CONTENTPKG website
 
+# Deploy the explicitly allowlisted public site with official Pages actions.
+# The repository's Pages source must be "GitHub Actions", not "Deploy from a branch".
 on:
   push:
     branches: [main]
-    paths:
-      - "site/**"
-      - ".github/workflows/publish-pages.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: contentpkg-community-gh-pages
+  group: contentpkg-community-pages
   cancel-in-progress: false
 
 jobs:
@@ -21,15 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: write # Only to fast-forward the existing public gh-pages branch.
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }
     steps:
-      - name: Check out approved public main revision
+      - name: Check out exact public main revision
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.sha }}
-          persist-credentials: true
+          persist-credentials: false
 
-      - name: Verify public site allowlist and exact head
+      - name: Validate and stage explicitly public files
         shell: bash
         run: |
           set -euo pipefail
@@ -42,49 +46,34 @@ jobs:
             printf 'STOP: unexpected public site files\n%s\n' "$actual" >&2
             exit 1
           }
+
+          output="$RUNNER_TEMP/contentpkg-site"
+          test ! -e "$output"
+          mkdir "$output"
           for path in bookpkg.html favicon.svg index.html musicpkg.html style.css; do
             test -f "site/$path" && test ! -L "site/$path"
+            install -m 0644 -- "site/$path" "$output/$path"
           done
           test -f site/_headers && test ! -L site/_headers
+          touch "$output/.nojekyll"
 
-      - name: Fast-forward existing gh-pages from allowlisted source files
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+
+      - name: Upload allowlisted Pages artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ runner.temp }}/contentpkg-site
+
+      - name: Reject stale source immediately before publishing
         shell: bash
         run: |
           set -euo pipefail
           test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA" || {
-            echo "STOP: main advanced since this workflow began" >&2
+            echo "STOP: main advanced during preparation; newer main run must publish" >&2
             exit 1
           }
 
-          git fetch --no-tags origin refs/heads/gh-pages:refs/remotes/origin/gh-pages
-          published="$RUNNER_TEMP/contentpkg-gh-pages"
-          test ! -e "$published"
-          git worktree add --detach "$published" refs/remotes/origin/gh-pages
-
-          # Never overwrite or remove unexpected files on the published branch.
-          mapfile -t existing < <(git -C "$published" ls-files | LC_ALL=C sort)
-          expected=(.nojekyll bookpkg.html favicon.svg index.html musicpkg.html style.css)
-          if [[ "${existing[*]}" != "${expected[*]}" ]]; then
-            printf 'STOP: published branch contains unexpected paths: %s\n' "${existing[*]}" >&2
-            exit 1
-          fi
-
-          for path in bookpkg.html favicon.svg index.html musicpkg.html style.css; do
-            cp -- "site/$path" "$published/$path"
-          done
-          touch "$published/.nojekyll"
-          git -C "$published" add --all
-          if git -C "$published" diff --cached --quiet; then
-            echo "PAGES_NO_CHANGE: published content already matches main"
-            exit 0
-          fi
-
-          git -C "$published" -c user.name='github-actions[bot]' \
-            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-            commit -m "Publish website from ${GITHUB_SHA}"
-          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA" || {
-            echo "STOP: main advanced before publication" >&2
-            exit 1
-          }
-          git -C "$published" push origin HEAD:refs/heads/gh-pages
-          echo "PAGES_BRANCH_UPDATED: GitHub Pages will publish this fast-forwarded branch"
+      - name: Deploy to existing public GitHub Pages site
+        id: deploy
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
