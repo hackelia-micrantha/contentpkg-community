@@ -28,7 +28,7 @@
         <p class="eyebrow">Micrantha / applied research</p>
         <h1>Digital ownership that travels with the content.</h1>
         <p class="lede">What if a digital purchase could be as durable and portable as the physical media it replaced?</p>
-        <p>CONTENTPKG explores self-contained digital ownership through encrypted content packages and compact blockchain-backed ownership evidence. The goal is to make digital purchases portable, independently verifiable and durable beyond the platforms that originally sold them. MUSICPKG is the first specialization.</p>
+        <p>CONTENTPKG explores self-contained digital ownership through encrypted content packages and compact blockchain-backed ownership evidence. The goal is to make digital purchases portable, tamper-evident and independently verifiable beyond the platforms that originally sold them. MUSICPKG is the first specialization.</p>
         <div class="actions">
           <a class="button primary" href="https://demo.musicpkg.micrantha.com/">Explore the music demo preview</a>
           <a class="button" href="https://github.com/hackelia-micrantha/contentpkg-community">Read the working draft</a>
@@ -48,13 +48,15 @@
     </section>
     <section class="wrap section" id="foundation">
       <p class="eyebrow">01 / The foundation</p>
-      <h2>Encryption meets verifiable ownership.</h2>
+      <h2>Encryption, integrity and verifiable ownership.</h2>
       <p class="intro">Instead of asking a vendor to authorize every use, the research explores packages that carry the evidence needed to verify their authenticity and establish historical ownership, alongside owner-controlled cryptographic authority.</p>
-      <div class="grid three">
-        <article><h3>Encrypted content</h3><p>Protect the media itself and authenticate its integrity. Possession of the encrypted file alone does not confer the authority to decrypt it.</p></article>
+      <div class="grid two">
+        <article><h3>Encrypted content</h3><p>Protect the media from unauthorized access. Possession of the encrypted file alone does not confer the authority to decrypt it.</p></article>
+        <article><h3>Tamper-evident by design</h3><p>Digital content should carry evidence of its authenticity, not simply rely on its distributor. Cryptographic signatures, authenticated encryption and hash-linked records allow conforming verifiers to detect invalid changes to protected content, authenticated metadata and ownership evidence.</p></article>
         <article><h3>Compact blockchain evidence</h3><p>Bundle signed issuance records and proofs from a purpose-built, hash-linked ownership ledger. This is evidence of historical issuance, not a cryptocurrency or proof of fresh title.</p><a href="https://github.com/hackelia-micrantha/contentpkg-community/blob/main/spec/ledger-v0.2.md">Ownership ledger specification</a></article>
         <article><h3>Owner-controlled authority</h3><p>Keep recovery and ordinary device authorization under the purchaser’s control, rather than depending on recurring approval from the original seller.</p></article>
       </div>
+      <div class="note"><strong>Tamper-evident, not tamper-proof.</strong> A package can be altered, but invalid changes to authenticated data should fail verification against trusted evidence. Legitimate ownership updates remain possible; verification does not prevent copying, destruction or plaintext capture.</div>
       <p class="meta">CONTENTPKG explores reusable packaging and cryptographic mechanics; each specialization defines its own ownership, access and transfer rules. MUSICPKG is the first working draft; other content profiles are research directions. CONTENTPKG is not a published general-purpose standard or a commercial rights service.</p>
     </section>
     <section class="wrap section" id="music">
