@@ -1,0 +1,79 @@
+name: Publish CONTENTPKG website
+
+# Deploy the explicitly allowlisted public site with official Pages actions.
+# The repository's Pages source must be "GitHub Actions", not "Deploy from a branch".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contentpkg-community-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out exact public main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Validate and stage explicitly public files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+          test -d site && test ! -L site
+          expected="$(printf '%s\n' _headers bookpkg.html favicon.svg index.html musicpkg.html style.css)"
+          actual="$(find site -mindepth 1 -maxdepth 1 -printf '%f\n' | LC_ALL=C sort)"
+          test "$actual" = "$expected" || {
+            printf 'STOP: unexpected public site files\n%s\n' "$actual" >&2
+            exit 1
+          }
+
+          output="$RUNNER_TEMP/contentpkg-site"
+          test ! -e "$output"
+          mkdir "$output"
+          for path in bookpkg.html favicon.svg index.html musicpkg.html style.css; do
+            test -f "site/$path" && test ! -L "site/$path"
+            install -m 0644 -- "site/$path" "$output/$path"
+          done
+          test -f site/_headers && test ! -L site/_headers
+          touch "$output/.nojekyll"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+
+      - name: Upload allowlisted Pages artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ runner.temp }}/contentpkg-site
+
+      - name: Reject stale source immediately before publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA" || {
+            echo "STOP: main advanced during preparation; newer main run must publish" >&2
+            exit 1
+          }
+
+      - name: Deploy to existing public GitHub Pages site
+        id: deploy
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5

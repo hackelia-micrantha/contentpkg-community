@@ -4,6 +4,21 @@ CONTENTPKG explores self-contained digital ownership through encrypted content p
 
 [Landing page source](site/index.html) · [MUSICPKG demo preview](https://demo.musicpkg.micrantha.com/) (access may be restricted)
 
+Public website deployment: each push to reviewed `main` triggers
+[Publish CONTENTPKG website](.github/workflows/publish-pages.yml), which
+stages only the five allowlisted `site/` HTML/CSS/SVG files and `.nojekyll`,
+then publishes the static artifact using GitHub's official Pages actions.
+Unrelated main changes may republish identical bytes to recover from a
+superseded run. The workflow excludes the Cloudflare-specific `site/_headers`
+file and does not publish private MUSICPKG implementation.
+
+**One-time Pages setting:** set **Settings → Pages → Build and deployment →
+Source: GitHub Actions** (instead of the historical `gh-pages` branch).
+The old `gh-pages` branch can remain as a rollback reference; the workflow
+does not push to it. GitHub Actions uses scoped `pages: write` and
+`id-token: write`, without a personal access token. After merging, verify
+the `github-pages` environment deployment and the public URL.
+
 MUSICPKG is an open digital music ownership format built around a simple product contract:
 
 > Buy a music file once. Own it. Play it on your devices. Back it up. Prove it is yours. Transfer ownership legitimately when the title permits it.
