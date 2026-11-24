@@ -83,5 +83,7 @@ h3 { font-size: 1.1rem; line-height: 1.35; }
   .node, .panel { border: 1px solid CanvasText; }
 }
 
-/* Product navigation: show the current document without relying on color. */
-.nav a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 2px; }
+/* Product navigation: distinguish the current page without relying on color. */
+.nav nav { gap: .35rem; }
+.nav nav a { display: inline-flex; align-items: center; min-height: 44px; padding: .35rem .65rem; border-bottom: 2px solid transparent; }
+.nav nav a[aria-current="page"] { color: var(--ink); font-weight: 700; background: var(--blue); border-bottom-color: currentColor; text-decoration: none; }
