@@ -1,0 +1,90 @@
+name: Publish CONTENTPKG website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/publish-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contentpkg-community-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # Only to fast-forward the existing public gh-pages branch.
+    steps:
+      - name: Check out approved public main revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: true
+
+      - name: Verify public site allowlist and exact head
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+          test -d site && test ! -L site
+          expected="$(printf '%s\n' _headers bookpkg.html favicon.svg index.html musicpkg.html style.css)"
+          actual="$(find site -mindepth 1 -maxdepth 1 -printf '%f\n' | LC_ALL=C sort)"
+          test "$actual" = "$expected" || {
+            printf 'STOP: unexpected public site files\n%s\n' "$actual" >&2
+            exit 1
+          }
+          for path in bookpkg.html favicon.svg index.html musicpkg.html style.css; do
+            test -f "site/$path" && test ! -L "site/$path"
+          done
+          test -f site/_headers && test ! -L site/_headers
+
+      - name: Fast-forward existing gh-pages from allowlisted source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA" || {
+            echo "STOP: main advanced since this workflow began" >&2
+            exit 1
+          }
+
+          git fetch --no-tags origin refs/heads/gh-pages:refs/remotes/origin/gh-pages
+          published="$RUNNER_TEMP/contentpkg-gh-pages"
+          test ! -e "$published"
+          git worktree add --detach "$published" refs/remotes/origin/gh-pages
+
+          # Never overwrite or remove unexpected files on the published branch.
+          mapfile -t existing < <(git -C "$published" ls-files | LC_ALL=C sort)
+          expected=(.nojekyll bookpkg.html favicon.svg index.html musicpkg.html style.css)
+          if [[ "${existing[*]}" != "${expected[*]}" ]]; then
+            printf 'STOP: published branch contains unexpected paths: %s\n' "${existing[*]}" >&2
+            exit 1
+          fi
+
+          for path in bookpkg.html favicon.svg index.html musicpkg.html style.css; do
+            cp -- "site/$path" "$published/$path"
+          done
+          touch "$published/.nojekyll"
+          git -C "$published" add --all
+          if git -C "$published" diff --cached --quiet; then
+            echo "PAGES_NO_CHANGE: published content already matches main"
+            exit 0
+          fi
+
+          git -C "$published" -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "Publish website from ${GITHUB_SHA}"
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA" || {
+            echo "STOP: main advanced before publication" >&2
+            exit 1
+          }
+          git -C "$published" push origin HEAD:refs/heads/gh-pages
+          echo "PAGES_BRANCH_UPDATED: GitHub Pages will publish this fast-forwarded branch"
